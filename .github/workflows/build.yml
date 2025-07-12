@@ -81,10 +81,5 @@ jobs:
           echo "- Package Manager: pnpm" >> $GITHUB_STEP_SUMMARY
           echo "- Build completed: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "- Build artifacts:" >> $GITHUB_STEP_SUMMARY
-          if [ -d "build" ]; then
-            find build/ -type f -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.app" | while read file; do
-              echo "  - $(basename "$file")" >> $GITHUB_STEP_SUMMARY
-            done
-          fi
 
 
