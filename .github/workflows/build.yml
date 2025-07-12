@@ -32,12 +32,12 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
-          pip install --upgrade pip
           pip install uv
           uv sync
 
       - name: 🏗️ Build application
         run: |
+          npm install
           npm run build
 
       - name: 🚀 Upload Packaged Package
