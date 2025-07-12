@@ -9,21 +9,20 @@
 import sys
 import os
 
-from build_plugin.config import Config
-
-app_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+app_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(app_dir)
 
-appName = Config.appName    # 应用名称
+from build_plugin.config import Config
+
+appName = Config.appName  # 应用名称
 appVersion = Config.appVersion  # 应用版本号
-appVersion = appVersion[1:]    # 去掉第一位V
+appVersion = appVersion[1:]  # 去掉第一位V
 appDeveloper = Config.appDeveloper  # 应用开发者
 appBlogs = Config.appBlogs  # 个人博客
-rootDir = os.path.dirname(app_dir)
-buildDir = os.path.join(rootDir, 'build')
-logoPath = os.path.join(rootDir, 'static', 'app.ico')
-appISSID = Config.appISSID    # 安装包唯一GUID
 
+buildDir = os.path.join(app_dir, 'build')
+logoPath = os.path.join(app_dir, 'static', 'app.ico')
+appISSID = Config.appISSID  # 安装包唯一GUID
 
 if not os.path.exists(buildDir):
     print(f"错误：构建目录不存在: {buildDir}")
@@ -32,6 +31,7 @@ if not os.path.exists(buildDir):
 if not os.path.exists(logoPath):
     print(f"错误：图标文件不存在: {logoPath}")
     sys.exit(1)
+
 
 # 获取配置文件内容
 def get_iss():
