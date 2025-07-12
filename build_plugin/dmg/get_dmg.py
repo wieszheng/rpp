@@ -27,7 +27,7 @@ def get_json():
     return """filename = '""" + dmgName + """'
 volume_name = '""" + dmgName + """.dmg'
 format = 'UDBZ'
-files = ['""" + app_dir + r"""\\build\\""" + appName + """.app', r'""" + app_dir + """\\build_plugin\dmg\潘高的小站.webloc']
+files = ['""" + app_dir + r"""/build/""" + appName + """.app', r'""" + app_dir + """/build_plugin\dmg\潘高的小站.webloc']
 symlinks = {'Applications': '/Applications'}
 icon_locations = {
     '""" + appName + """.app': (160, 120),
@@ -37,8 +37,8 @@ icon_locations = {
 window_rect = ((200, 200), (590, 416))
 icon_size = 60
 text_size = 12
-badge_icon = '""" + app_dir + r"""\static\\app.icns'
-background = '""" + app_dir + r"""\\build_plugin\dmg\bg.png'
+badge_icon = '""" + app_dir + r"""/static/app.icns'
+background = '""" + app_dir + r"""/build_plugin/dmg/bg.png'
 """
 
 
