@@ -25,6 +25,10 @@ jobs:
         with:
           node-version: 22
 
+      - name: 📦 Install Node.js dependencies
+        run: |
+          npm install
+
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
@@ -37,12 +41,6 @@ jobs:
       - name: 📦 Install Python dependencies
         run: |
           uv sync
-
-      - name: 📦 Install Node.js dependencies
-        run: |
-          npm config set registry https://registry.npmjs.org/
-          npm install
-        timeout-minutes: 15
 
       - name: 🧪 Run tests
         run: |
