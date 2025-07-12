@@ -97,18 +97,10 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 issDir = os.path.dirname(__file__)
 issFilePath = os.path.join(issDir, 'InnoSetup.iss')
 
-print(f"正在生成 Inno Setup 配置文件...")
-print(f"构建目录: {buildDir}")
-print(f"图标文件: {logoPath}")
-print(f"输出文件: {issFilePath}")
-
 # 检查源文件是否存在
 sourceDir = os.path.join(buildDir, appName)
 if not os.path.exists(sourceDir):
-    print(f"错误：源文件目录不存在: {sourceDir}")
     sys.exit(1)
 
 with open(issFilePath, 'w', encoding='utf-8') as f:
     f.write(get_iss())
-
-print(f"Inno Setup 配置文件已生成: {issFilePath}")
