@@ -41,6 +41,7 @@ jobs:
       - name: 📦 Install Node.js dependencies
         run: |
           npm config set registry https://registry.npmjs.org/
+          npm install
         timeout-minutes: 15
 
       - name: 🧪 Run tests
