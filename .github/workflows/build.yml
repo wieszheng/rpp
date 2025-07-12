@@ -1,0 +1,50 @@
+name: 🛠️ Build Workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    name: 🔧 Setup and Build
+    strategy:
+      matrix:
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install uv
+          uv sync
+
+      - name: 🏗️ Build application
+        run: |
+          npm run build
+
+      - name: 🚀 Upload Packaged Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Setup_${{ runner.os }}
+          retention-days: 1
+          path: build/*-*_*.*
+
+
