@@ -59,15 +59,6 @@ jobs:
         run: |
           pnpm run build
 
-      - name: 🔍 Verify build artifacts
-        run: |
-          echo "Checking build directory contents:"
-          ls -la build/ || echo "Build directory not found"
-          echo "Looking for executable files:"
-          find build/ -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.app" || echo "No executable files found"
-          echo "Build directory structure:"
-          find build/ -type f || echo "No files found in build directory"
-
       - name: 🚀 Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
