@@ -25,8 +25,9 @@ jobs:
         with:
           node-version: 22
 
-      - name: 📦 Install Node.js dependencies
+      - name: 📦 Install npm dependencies
         run: |
+          npm cache clean --force
           npm install
 
       - name: 🐍 Setup Python

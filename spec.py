@@ -24,7 +24,7 @@ def spec_first_part():
     return f'''# -*- mode: python ; coding: utf-8 -*-
 
 import os
-
+import sys
 import PyInstaller.config
 
 # 存放最终打包成app的相对路径
