@@ -38,7 +38,7 @@ if not os.path.exists(cachePath):
 PyInstaller.config.CONF['workpath'] = cachePath
 
 # icon相对路径
-icoPath = os.path.join('static', 'app.ico')
+icoPath = os.path.join('static', 'app.ico') 
 
 # 项目名称
 appName = '{appName}'
@@ -160,6 +160,7 @@ system = sys.platform.lower()
 
 if system == 'win32':
     console = False
+    icoPath = os.path.join('static', 'app.ico')
     # windows.spec
     with open(os.path.join(spec_dir, 'build_windows.spec'), 'w+', encoding='utf-8') as f:
         f.write(spec_first_part() + spec_package_part_exe())
@@ -173,6 +174,7 @@ elif system == 'linux':
         f.write(spec_first_part() + spec_package_part_exe())
 elif system == 'darwin':
     console = False
+    icoPath = os.path.join('static', 'app.icns')
     with open(os.path.join(spec_dir, 'build_macos.spec'), 'w+', encoding='utf-8') as f:
         f.write(spec_first_part() + spec_package_part_app())
 

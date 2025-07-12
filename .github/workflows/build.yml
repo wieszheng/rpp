@@ -38,12 +38,10 @@ jobs:
       - name: 📦 Install Python dependencies
         run: |
           uv sync
-        env:
-          UV_CACHE_DIR: ${{ github.workspace }}/.uv_cache
 
       - name: 📦 Install Node.js dependencies
         run: |
-          npm ci
+          npm install
 
       - name: 🧪 Run tests
         run: |
