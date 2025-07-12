@@ -10,10 +10,11 @@
 import os
 import sys
 
-from build_plugin.config import Config
-
 app_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(app_dir)
+
+from build_plugin.config import Config
+
 
 appName = Config.appName  # 应用名称
 appVersion = Config.appVersion  # 应用版本号
