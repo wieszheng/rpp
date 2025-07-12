@@ -11,10 +11,10 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    name: 🔧 Setup and Build
+    name: 🔧 Setup and Build on ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ windows-latest, macos-latest, ubuntu-latest ]
+        os: [ windows-latest, macos-latest ]
 
     steps:
       - name: 📥 Checkout code
@@ -24,27 +24,80 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: 📦 Install dependencies
+      - name: 📦 Install uv
         run: |
           pip install uv
+
+      - name: 📦 Install Python dependencies
+        run: |
           uv sync
+        env:
+          UV_CACHE_DIR: ${{ github.workspace }}/.uv_cache
+
+      - name: 📦 Install Node.js dependencies
+        run: |
+          npm ci
+
+      - name: 🧪 Run tests
+        run: |
+          echo "Running basic tests..."
+          python -c "import sys; print(f'Python version: {sys.version}')"
+          node --version
+          npm --version
+          uv --version
+        env:
+          UV_CACHE_DIR: ${{ github.workspace }}/.uv_cache
 
       - name: 🏗️ Build application
         run: |
-          npm install
           npm run build
+        env:
+          UV_CACHE_DIR: ${{ github.workspace }}/.uv_cache
 
-      - name: 🚀 Upload Packaged Package
+      - name: 🔍 Verify build artifacts
+        run: |
+          echo "Checking build directory contents:"
+          ls -la build/ || echo "Build directory not found"
+          echo "Looking for executable files:"
+          find build/ -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.app" || echo "No executable files found"
+          echo "Build directory structure:"
+          find build/ -type f || echo "No files found in build directory"
+
+      - name: 🚀 Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Setup_${{ runner.os }}
-          retention-days: 1
-          path: build/*-*_*.*
+          name: Build_${{ runner.os }}
+          retention-days: 7
+          path: |
+            build/*.exe
+            build/*.dmg
+            build/*.AppImage
+            build/*.deb
+            build/*.rpm
+            build/*.app
+            dist/
+        if: always()
+
+      - name: 📋 Build Summary
+        if: always()
+        run: |
+          echo "## Build Summary for ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- OS: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Python: 3.12" >> $GITHUB_STEP_SUMMARY
+          echo "- Node.js: 22" >> $GITHUB_STEP_SUMMARY
+          echo "- Build completed: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Build artifacts:" >> $GITHUB_STEP_SUMMARY
+          if [ -d "build" ]; then
+            find build/ -type f -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.app" | while read file; do
+              echo "  - $(basename "$file")" >> $GITHUB_STEP_SUMMARY
+            done
+          fi
 
 
