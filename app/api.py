@@ -12,6 +12,15 @@ from  fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get("/dd")
+@router.get("/api/devices")
 async def read_root():
-    return {"message": "Hello World"}
+    return [{"name": "device1", "id": 1}]
+
+
+
+@router.get("/api/scenes")
+async def get_scenes():
+    return [
+        {"id": "scene1", "name": "启动App"},
+        {"id": "scene2", "name": "滑动列表"}
+    ]

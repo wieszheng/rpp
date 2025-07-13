@@ -14,11 +14,8 @@ console = False  # 是否展示终端
 appName = "RPP"  # 项目名称
 version = "1.0.01"  # 版本号
 
-# 添加文件到打包中
-addDll = ""
-# 添加文件夹到打包中
-addModules = ""
-
+added_files = "('./view', 'view')"
+hidden_imports = "['clr', 'aiosqlite']"
 
 def spec_first_part():
     return f'''# -*- mode: python ; coding: utf-8 -*-
@@ -38,7 +35,7 @@ if not os.path.exists(cachePath):
 PyInstaller.config.CONF['workpath'] = cachePath
 
 # icon相对路径
-icoPath = os.path.join('static', 'app.ico' if sys.platform.lower() == 'win32' else 'app.icns')
+icoPath = os.path.join('static', 'logo.ico' if sys.platform.lower() == 'win32' else 'app.icns')
 
 # 项目名称
 appName = '{appName}'
@@ -49,9 +46,9 @@ version = '{version}'
 
 a = Analysis(['main.py'],
             pathex=[],
-            binaries=[{addDll}],
-            datas=[{addModules}],
-            hiddenimports=[],
+            binaries=[],
+            datas=[{added_files}],
+            hiddenimports={hidden_imports},
             hookspath=[],
             hooksconfig={{}},
             runtime_hooks=[],

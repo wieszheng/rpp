@@ -21,7 +21,7 @@ appDeveloper = Config.appDeveloper  # 应用开发者
 appBlogs = Config.appBlogs  # 个人博客
 
 buildDir = os.path.join(app_dir, 'build')
-logoPath = os.path.join(app_dir, 'static', 'app.ico')
+logoPath = os.path.join(app_dir, 'static', 'logo.ico')
 appISSID = Config.appISSID  # 安装包唯一GUID
 
 if not os.path.exists(buildDir):
