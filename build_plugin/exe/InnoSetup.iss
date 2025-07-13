@@ -25,7 +25,7 @@ DisableProgramGroupPage=yes
 
 OutputDir=D:\Workcode\python\rpp\build
 OutputBaseFilename=RPP-V1.0.01_Windows
-SetupIconFile=D:\Workcode\python\rpp\static\app.ico
+SetupIconFile=D:\Workcode\python\rpp\static\logo.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
