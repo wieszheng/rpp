@@ -46,17 +46,6 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-static_dir = os.path.join(current_dir, "view")
-
-app.mount("/view", StaticFiles(directory=static_dir), name="view")
-
-
-@app.get("/")
-async def index():
-    return FileResponse(os.path.join(static_dir, "index.html"))
-
-
 app.include_router(api.router)
 
 
@@ -95,10 +84,11 @@ def main():
     init_width, init_height = int(width * 2 / 3), int(height * 4 / 5.5)
     min_width, min_height = int(width / 2), int(height / 2)
 
-    webview.create_window(title="RPP v1.0.01", url=f"http://localhost:{port}", width=init_width, height=init_height,
+    webview.create_window(title="RPP v1.0.01", url="web/index.html", width=init_width, height=init_height,
                           min_size=(min_width, min_height))
     webview.start(debug=True, http_server=True)
 
 
 if __name__ == '__main__':
     main()
+    # uvicorn.run(app, host="127.0.0.1", port=8000)

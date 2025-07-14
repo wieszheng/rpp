@@ -14,8 +14,8 @@ console = False  # 是否展示终端
 appName = "RPP"  # 项目名称
 version = "1.0.01"  # 版本号
 
-added_files = "('./view', 'view')"
-hidden_imports = "['clr', 'aiosqlite']"
+added_files = "('view/dist', 'web'), ('static', 'static')"
+hidden_imports = "['clr', 'aiomysql']"
 
 def spec_first_part():
     return f'''# -*- mode: python ; coding: utf-8 -*-

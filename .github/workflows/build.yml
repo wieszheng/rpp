@@ -15,6 +15,10 @@ jobs:
     strategy:
       matrix:
         os: [ windows-latest, macos-latest ]
+        arch: [ x86_64, arm64 ]
+        exclude:
+          - os: windows-latest
+            arch: arm64
 
     steps:
       - name: 📥 Checkout code
@@ -57,7 +61,17 @@ jobs:
 
       - name: 🏗️ Build application
         run: |
-          pnpm run build
+          if [ "${{ matrix.os }}" = "macos-latest" ]; then
+            if [ "${{ matrix.arch }}" = "x86_64" ]; then
+              echo "打包 macOS x86_64 版本..."
+              arch -x86_64 pnpm run build
+            else
+              echo "打包 macOS arm64 版本..."
+              arch -arm64 pnpm run build
+            fi
+          else
+            pnpm run build
+          fi
 
       - name: 🚀 Upload Build Artifacts
         uses: actions/upload-artifact@v4

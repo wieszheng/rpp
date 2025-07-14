@@ -18,12 +18,16 @@ from sqlalchemy.ext.asyncio import (
 from app.models import Base
 
 url = URL.create(
-    drivername="sqlite+aiosqlite",
-    database="test.db",
+    drivername="mysql+aiomysql",
+    username="root",
+    password="mysql123",
+    host="82.157.176.120",
+    port=3306,
+    database="test",
     query={"charset": "utf8mb4"},
 )
 _async_engine = create_async_engine(url, future=True, echo=False)
-_async_db_session = async_sessionmaker(_async_engine, autoflush=False, expire_on_commit=False)
+_async_db_session = async_sessionmaker(bind=_async_engine, class_=AsyncSession, autocommit=False, expire_on_commit=False)
 
 
 async def setup_database():
