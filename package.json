@@ -4,7 +4,7 @@
   "version": "1.0.01",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "shx rm -rf build/* && shx rm -rf dist && pnpm -C ./view insatll && pnpm -C ./view run build && run-script-os",
+    "build": "shx rm -rf build/* && shx rm -rf dist && cb ./view && pnpm insatll && pnpm run build && run-script-os",
     "build:windows": "uv run .\\spec.py && uv run pyinstaller --clean .\\build_windows-folder.spec && pnpm run build:exe",
     "build:exe": "shx rm -rf build/*_Windows.exe && uv run .\\build_plugin\\exe\\get_iss.py && build_plugin\\exe\\InnoSetup6\\ISCC.exe build_plugin\\exe\\InnoSetup.iss",
     "build:macos": "uv run ./spec.py && uv run pyinstaller --clean ./build_macos.spec && pnpm run build:dmg",
