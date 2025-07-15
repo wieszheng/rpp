@@ -4,7 +4,7 @@
   "version": "1.0.01",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init": "pnpm run clean && pnpm install && pnpm run initInstall",
+    "init": "pnpm install && pnpm run initInstall",
     "initInstall": "run-script-os",
     "install:windows": "pnpm -C .\\view install ",
     "install:macos": "pnpm -C ./view install",
