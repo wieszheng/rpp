@@ -15,7 +15,7 @@ appName = "RPP"  # 项目名称
 version = "1.0.01"  # 版本号
 
 added_files = "('view/dist', 'web'), ('static', 'static')"
-hidden_imports = "['clr', 'aiomysql']"
+hidden_imports = "['aiomysql']"
 
 def spec_first_part():
     return f'''# -*- mode: python ; coding: utf-8 -*-
@@ -49,7 +49,7 @@ a = Analysis(['main.py'],
             binaries=[],
             datas=[{added_files}],
             hiddenimports={hidden_imports},
-            hookspath=[],
+            hookspath=['hooks'],
             hooksconfig={{}},
             runtime_hooks=[],
             excludes=[],

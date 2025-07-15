@@ -36,7 +36,7 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
-          pnpm install
+          pnpm init
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5

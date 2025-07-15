@@ -8,6 +8,7 @@ dependencies = [
     "aiomysql>=0.2.0",
     "dmgbuild>=1.6.5",
     "fastapi[all]>=0.116.1",
+    "hmdriver2>=1.4.4",
     "loguru>=0.7.3",
     "pyinstaller>=6.14.2",
     "pywebview>=5.4",

@@ -14,11 +14,10 @@ import uvicorn
 import webview
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.responses import FileResponse
-from starlette.staticfiles import StaticFiles
 
 from app import api
 from app.db import setup_database
+from hmdriver2 import hdc
 
 
 @asynccontextmanager
@@ -72,6 +71,7 @@ def main():
     主函数
     :return:
     """
+    print(hdc.list_devices())
     port = get_unused_port()
     t = threading.Thread(target=uvicorn.run, args=(app,), kwargs={"port": port})
     t.daemon = True
